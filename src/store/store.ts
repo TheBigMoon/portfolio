@@ -8,4 +8,4 @@ const reducers = combineReducers({
 type Reducers = typeof reducers;
 export type App = ReturnType<Reducers>
 
-const store = createStore(reducers)
+export const store = createStore(reducers)
