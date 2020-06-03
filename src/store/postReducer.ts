@@ -14,7 +14,7 @@ const initialState: StateType = {
   post: null
 }
 
-export const postReducer = (state: StateType = initialState, action: ActionType) => {
+export const postReducer = (state: StateType = initialState, action: ActionType): StateType => {
   switch (action.type) {
     case SET_POSTS: {
       return {
@@ -25,7 +25,7 @@ export const postReducer = (state: StateType = initialState, action: ActionType)
     case SET_POST: {
       return {
         ...state,
-        posts: action.post
+        post: action.post
       }
     }
     default: {
