@@ -1,6 +1,6 @@
 import React from "react";
 import {PostType} from "../../types/types";
-import {connect, DefaultRootState} from "react-redux";
+import {connect} from "react-redux";
 import {App} from "../../store/store";
 import {getPosts} from "../../store/postReducer";
 
