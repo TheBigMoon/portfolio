@@ -21,5 +21,5 @@ export type ActionType = GetPostsType | SetPostsType | GetPostType | SetPostType
 // Action types
 export type GetPostsType = {type: typeof GET_POSTS}
 export type SetPostsType = {type: typeof SET_POSTS, posts: Array<PostType>}
-export type GetPostType = {type: typeof GET_POST}
+export type GetPostType = {type: typeof GET_POST, id: number}
 export type SetPostType = {type: typeof SET_POST, post: PostType}

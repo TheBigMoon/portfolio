@@ -36,5 +36,5 @@ export const postReducer = (state: StateType = initialState, action: ActionType)
 
 export const getPosts = (): GetPostsType => ({type: GET_POSTS})
 export const setPosts = (posts: Array<PostType>): SetPostsType => ({type: SET_POSTS, posts})
-export const getPost = (): GetPostType => ({type: GET_POST})
+export const getPost = (id: number): GetPostType => ({type: GET_POST, id})
 export const setPost = (post: PostType): SetPostType => ({type: SET_POST, post})

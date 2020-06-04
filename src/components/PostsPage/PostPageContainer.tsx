@@ -8,11 +8,12 @@ type MapStateProps = {
   post: PostType | null
 }
 type MapDispatchProps = {
-  getPost: () => void
+  getPost: (id: number) => void
 }
-type PostsPageProps = MapStateProps & MapDispatchProps
 
-const PostPageContainer: React.FC<PostsPageProps> = ({post, getPost}) => {
+type PostPageProps = MapStateProps & MapDispatchProps
+
+const PostPageContainer: React.FC<PostPageProps> = ({post, getPost}) => {
   return (
     <div>
 
