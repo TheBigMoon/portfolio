@@ -10,7 +10,7 @@ export const API = {
       .then(response => response.data)
   },
   async getPost(id: number) {
-    return await instance.get(`${id}?_embed=comments`)
+    return await instance.get(`posts/${id}?_embed=comments`)
       .then(response => response.data)
   }
 }
