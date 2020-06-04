@@ -16,8 +16,8 @@ export const API = {
   async deletePost(id: number) {
     return await instance.delete(`posts/${id}`)
   },
-  async updatePost(id: number, title: string, body: string) {
-    return await instance.put(`posts/${id}`, {title, body})
+  async updatePost(postId: number, title: string, body: string) {
+    return await instance.put(`posts/${postId}`, {title, body})
   },
   async createPost(title: string, body: string) {
     return await instance.post('posts', {title, body})
