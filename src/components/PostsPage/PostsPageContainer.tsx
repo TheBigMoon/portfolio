@@ -16,7 +16,7 @@ type PostsPageProps = MapStateProps & MapDispatchProps
 const PostsPageContainer: React.FC<PostsPageProps> = ({posts, getPosts}) => {
   useEffect(() => {
     getPosts()
-  })
+  }, [getPosts])
 
   const allPosts = posts === null ?
     null :
