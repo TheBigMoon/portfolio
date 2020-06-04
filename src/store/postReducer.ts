@@ -1,15 +1,7 @@
 import {
-  ActionType,
-  GetPostType,
-  GetPostsType,
-  SetPostType,
-  SetPostsType,
-  PostType,
-  StateType,
-  UpdatePostType,
-  DeletePostType,
-  CreatePostType,
-  CreateCommentType, SetUpdatedPostType, ClearDeletedPostType, SetCreatedPostType
+  ActionType, GetPostType, GetPostsType, SetPostType, SetPostsType,
+  PostType, StateType, UpdatePostType, DeletePostType, CreatePostType,
+  CreateCommentType, SetUpdatedPostType, ClearDeletedPostType
 } from "../types/types";
 
 export const GET_POSTS = 'GET_POSTS';
@@ -31,7 +23,7 @@ const initialState: StateType = {
   post: null
 }
 
-export const postReducer = (state: StateType = initialState, action: ActionType): StateType => {
+export const postReducer = (state = initialState, action: ActionType): StateType => {
   switch (action.type) {
     case SET_POSTS: {
       return {
@@ -43,6 +35,29 @@ export const postReducer = (state: StateType = initialState, action: ActionType)
       return {
         ...state,
         post: action.post
+      }
+    }
+    case CLEAR_DELETED_POST: {
+      return {
+        ...state,
+        posts: state.posts && state.posts.filter(post => post.id !== action.postId)
+      }
+    }
+    case SET_UPDATED_POST: {
+      return {
+        ...state,
+        posts: state.posts && state.posts.map(post => {
+          if (post.id === action.postId) {
+            return {
+              ...post,
+              comments: post.comments,
+              title: action.title,
+              body: action.body
+            }
+          } else {
+            return post;
+          }
+        })
       }
     }
     default: {
@@ -58,10 +73,6 @@ export const setPost = (post: PostType): SetPostType => ({type: SET_POST, post})
 export const deletePost = (postId: number): DeletePostType => ({type: DELETE_POST, postId})
 export const clearDeletedPost = (postId: number): ClearDeletedPostType => ({type: CLEAR_DELETED_POST, postId})
 export const createPost = (title: string, body: string): CreatePostType => ({type: CREATE_POST, title, body})
-// Под вопросом: надо ли setCreatedPost вообще? Или можно просто сделать запрос на обновление постов
-export const setCreatedPost = (title: string, body: string): SetCreatedPostType => ({
-  type: SET_CREATED_POST, title, body
-})
 export const updatePost = (postId: number, title: string, body: string): UpdatePostType => ({
   type: UPDATE_POST, postId, title, body
 })
@@ -70,8 +81,4 @@ export const setUpdatedPost = (postId: number, title: string, body: string): Set
 })
 export const createComment = (postId: number, body: string): CreateCommentType => ({
   type: CREATE_COMMENT, postId, body
-})
-// Под вопросом: надо ли setCreatedComment вообще? Или можно просто сделать запрос на обновление комментов
-export const setCreatedComment = (title: string, body: string): SetCreatedPostType => ({
-  type: SET_CREATED_POST, title, body
 })
