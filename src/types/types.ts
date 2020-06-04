@@ -26,7 +26,10 @@ export type StateType = {
   posts: Array<PostType> | null,
   post: PostType | null
 }
-export type ActionType = GetPostsType | SetPostsType | GetPostType | SetPostType
+export type ActionType = GetPostsType | SetPostsType | GetPostType
+  | SetPostType | UpdatePostType | SetUpdatedPostType |
+  DeletePostType | ClearDeletedPostType | CreatePostType |
+  SetCreatedPostType | CreateCommentType | SetCreatedCommentType
 
 // Action types
 export type GetPostsType = {type: typeof GET_POSTS}
