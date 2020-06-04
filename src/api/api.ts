@@ -4,11 +4,13 @@ const instance = axios.create({
   baseURL: 'https://bloggy-api.herokuapp.com/'
 })
 
-const API = {
-  getPosts() {
-    return instance.get('posts')
+export const API = {
+  async getPosts() {
+    return await instance.get('posts')
+      .then(response => response.data)
   },
-  getPost(id: number) {
-    return instance.get(`${id}?_embed=comments`)
+  async getPost(id: number) {
+    return await instance.get(`${id}?_embed=comments`)
+      .then(response => response.data)
   }
 }
