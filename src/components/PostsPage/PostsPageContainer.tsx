@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {App} from "../../store/store";
 import {getPosts} from "../../store/postReducer";
 import Post from "./Post";
+import AddPostButton from "../common/AddPostButton/AddPostButton";
 
 type MapStateProps = {
   posts: Array<PostType> | null
@@ -25,6 +26,7 @@ const PostsPageContainer: React.FC<PostsPageProps> = ({posts, getPosts}) => {
   return (
     <div>
       {allPosts}
+      <AddPostButton/>
     </div>
   )
 }

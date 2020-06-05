@@ -5,6 +5,7 @@ import {App} from "../../store/store";
 import {getPost} from "../../store/postReducer";
 import Post from "./Post";
 import {useParams} from "react-router-dom";
+import AddPostButton from "../common/AddPostButton/AddPostButton";
 
 type MapStateProps = {
   post: PostType | null
@@ -25,6 +26,7 @@ const PostPageContainer: React.FC<PostPageProps> = ({post, getPost}) => {
   return (
     <div>
       <Post showLink={false} post={post}/>
+      <AddPostButton/>
     </div>
   )
 }
