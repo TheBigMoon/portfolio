@@ -20,7 +20,7 @@ const PostsPageContainer: React.FC<PostsPageProps> = ({posts, getPosts}) => {
 
   const allPosts = posts === null ?
     null :
-    posts.map(post => <Post post={post}/>)
+    posts.map(post => <Post showLink={true} post={post}/>)
 
   return (
     <div>

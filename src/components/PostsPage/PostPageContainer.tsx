@@ -24,7 +24,7 @@ const PostPageContainer: React.FC<PostPageProps> = ({post, getPost}) => {
 
   return (
     <div>
-      <Post post={post}/>
+      <Post showLink={false} post={post}/>
     </div>
   )
 }
