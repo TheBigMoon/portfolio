@@ -2,40 +2,56 @@ import React, {useEffect} from "react";
 import {PostType} from "../../types/types";
 import {connect} from "react-redux";
 import {App} from "../../store/store";
-import {getPosts} from "../../store/postReducer";
+import {createPost, getPosts, toggleAddPostPopUp} from "../../store/postReducer";
 import Post from "./Post";
 import AddPostButton from "../common/AddPostButton/AddPostButton";
+import AddPostForm from "../common/reduxForms/AddPostForm/AddPostForm";
 
 type MapStateProps = {
-  posts: Array<PostType> | null
+  posts: Array<PostType> | null,
+  showAddPost: boolean
 }
 type MapDispatchProps = {
-  getPosts: () => void
+  getPosts: () => void,
+  toggleAddPostPopUp: () => void,
+  createPost: (title: string, body: string) => void
+}
+export type AddPostProps = {
+  addPostTitle: string,
+  addPostBody: string
 }
 type PostsPageProps = MapStateProps & MapDispatchProps
 
-const PostsPageContainer: React.FC<PostsPageProps> = ({posts, getPosts}) => {
+const PostsPageContainer: React.FC<PostsPageProps> = (
+  {posts, getPosts, toggleAddPostPopUp, showAddPost, createPost}
+  ) => {
   useEffect(() => {
     getPosts()
   }, [getPosts])
 
   const allPosts = posts === null ?
     null :
-    posts.map(post => <Post showLink={true} post={post}/>)
+    posts.map(post => <Post showLink={true} post={post}/>).reverse()
+
+  const addPost = ({addPostTitle, addPostBody}: AddPostProps) => {
+    createPost(addPostTitle, addPostBody)
+  }
 
   return (
     <div>
       {allPosts}
-      <AddPostButton/>
+      {showAddPost ? <AddPostForm onSubmit={addPost} toggleAddPostPopUp={toggleAddPostPopUp}/> : null}
+      <AddPostButton toggleAddPostPopUp={toggleAddPostPopUp}/>
     </div>
   )
 }
 
 const mapStateToProps = (state: App): MapStateProps => ({
-  posts: state.postPage.posts
+  posts: state.postPage.posts,
+  showAddPost: state.postPage.popUps.showAddPost
 });
 
 export default connect<MapStateProps, MapDispatchProps, {}, App>(
   mapStateToProps,
-  {getPosts}
+  {getPosts, toggleAddPostPopUp, createPost}
 )(PostsPageContainer);

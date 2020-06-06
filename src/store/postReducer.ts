@@ -1,7 +1,20 @@
 import {
-  ActionType, GetPostType, GetPostsType, SetPostType, SetPostsType,
-  PostType, StateType, UpdatePostType, DeletePostType, CreatePostType,
-  CreateCommentType, SetUpdatedPostType, ClearDeletedPostType
+  ActionType,
+  GetPostType,
+  GetPostsType,
+  SetPostType,
+  SetPostsType,
+  PostType,
+  StateType,
+  UpdatePostType,
+  DeletePostType,
+  CreatePostType,
+  CreateCommentType,
+  SetUpdatedPostType,
+  ClearDeletedPostType,
+  ToggleAddPostPopUp,
+  ToggleAddCommentPopUp,
+  ToggleUpdatePostPopUp
 } from "../types/types";
 
 export const GET_POSTS = 'GET_POSTS';
@@ -16,11 +29,19 @@ export const CREATE_POST = 'CREATE_POST';
 export const SET_CREATED_POST = 'SET_CREATED_POST';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const SET_CREATED_COMMENT = 'SET_CREATED_COMMENT';
+export const TOGGLE_ADD_POST_POP_UP = 'TOGGLE_ADD_POST_POP_UP';
+export const TOGGLE_ADD_COMMENT_POP_UP = 'TOGGLE_ADD_COMMENT_POP_UP';
+export const TOGGLE_UPDATE_POST_POP_UP = 'TOGGLE_UPDATE_POST_POP_UP';
 
 
 const initialState: StateType = {
   posts: null,
-  post: null
+  post: null,
+  popUps: {
+    showAddPost: false,
+    showAddComment: false,
+    showUpdatePost: false
+  }
 }
 
 export const postReducer = (state = initialState, action: ActionType): StateType => {
@@ -60,6 +81,33 @@ export const postReducer = (state = initialState, action: ActionType): StateType
         })
       }
     }
+    case TOGGLE_ADD_POST_POP_UP: {
+      return {
+        ...state,
+        popUps: {
+          ...state.popUps,
+          showAddPost: !state.popUps.showAddPost
+        }
+      }
+    }
+    case TOGGLE_ADD_COMMENT_POP_UP: {
+      return {
+        ...state,
+        popUps: {
+          ...state.popUps,
+          showAddComment: !state.popUps.showAddComment
+        }
+      }
+    }
+    case TOGGLE_UPDATE_POST_POP_UP: {
+      return {
+        ...state,
+        popUps: {
+          ...state.popUps,
+          showUpdatePost: !state.popUps.showUpdatePost
+        }
+      }
+    }
     default: {
       return state;
     }
@@ -82,3 +130,7 @@ export const setUpdatedPost = (postId: number, title: string, body: string): Set
 export const createComment = (postId: number, body: string): CreateCommentType => ({
   type: CREATE_COMMENT, postId, body
 })
+// PopUp actions
+export const toggleAddPostPopUp = (): ToggleAddPostPopUp => ({type: TOGGLE_ADD_POST_POP_UP});
+export const toggleAddCommentPopUp = (): ToggleAddCommentPopUp => ({type: TOGGLE_ADD_COMMENT_POP_UP});
+export const toggleUpdatePostPopUp = (): ToggleUpdatePostPopUp => ({type: TOGGLE_UPDATE_POST_POP_UP});

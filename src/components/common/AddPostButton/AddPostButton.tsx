@@ -2,9 +2,13 @@ import React from "react";
 import addPostBtn from '../../../multimedia/addPostButton.png';
 import s from './AddPostButton.module.css';
 
-const AddPostButton = () => {
+type AddPostBtnProps = {
+  toggleAddPostPopUp: () => void
+}
+
+const AddPostButton: React.FC<AddPostBtnProps> = ({toggleAddPostPopUp}) => {
   return (
-    <div className={s.addPost}>
+    <div onClick={toggleAddPostPopUp} className={s.addPost}>
       <img src={addPostBtn} alt=""/>
     </div>
   )

@@ -2,9 +2,11 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {postReducer} from "./postReducer";
 import createSagaMiddleware from 'redux-saga'
 import {sagaWatcher} from "../sagas/sagas";
+import {reducer as formReducer} from 'redux-form';
 
 const reducers = combineReducers({
-  postPage: postReducer
+  postPage: postReducer,
+  form: formReducer
 })
 
 type Reducers = typeof reducers;
