@@ -41,7 +41,7 @@ const PostsPageContainer: React.FC<PostsPageProps> = (
     <div>
       {allPosts}
       {showAddPost ? <AddPostForm onSubmit={addPost} toggleAddPostPopUp={toggleAddPostPopUp}/> : null}
-      <AddPostButton toggleAddPostPopUp={toggleAddPostPopUp}/>
+      {!showAddPost ? <AddPostButton toggleAddPostPopUp={toggleAddPostPopUp}/> : null}
     </div>
   )
 }
