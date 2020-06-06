@@ -27,6 +27,7 @@ function* createPostWorker(action: CreatePostType) {
   const {title, body} = action;
   yield call(API.createPost, title, body);
   yield put({type: TOGGLE_ADD_POST_POP_UP})
+  yield put({type: GET_POSTS})
 }
 
 function* updatePostWorker(action: UpdatePostType) {
