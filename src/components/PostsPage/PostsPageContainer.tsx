@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {PostType} from "../../types/types";
 import {connect} from "react-redux";
 import {App} from "../../store/store";
-import {createPost, getPosts, toggleAddPostPopUp} from "../../store/postReducer";
+import {createPost, deletePost, getPosts, toggleAddPostPopUp} from "../../store/postReducer";
 import Post from "./Post";
 import AddPostButton from "../common/AddPostButton/AddPostButton";
 import AddPostForm from "../common/reduxForms/AddPostForm/AddPostForm";
@@ -14,7 +14,8 @@ type MapStateProps = {
 type MapDispatchProps = {
   getPosts: () => void,
   toggleAddPostPopUp: () => void,
-  createPost: (title: string, body: string) => void
+  createPost: (title: string, body: string) => void,
+  deletePost: (id: number) => void
 }
 export type AddPostProps = {
   addPostTitle: string,
@@ -23,7 +24,7 @@ export type AddPostProps = {
 type PostsPageProps = MapStateProps & MapDispatchProps
 
 const PostsPageContainer: React.FC<PostsPageProps> = (
-  {posts, getPosts, toggleAddPostPopUp, showAddPost, createPost}
+  {posts, getPosts, toggleAddPostPopUp, showAddPost, createPost, deletePost}
   ) => {
   useEffect(() => {
     getPosts()
@@ -31,7 +32,7 @@ const PostsPageContainer: React.FC<PostsPageProps> = (
 
   const allPosts = posts === null ?
     null :
-    posts.map(post => <Post showLink={true} post={post}/>).reverse()
+    posts.map(post => <Post showDeleteBtn={true} deletePost={deletePost} showLink={true} post={post}/>).reverse()
 
   const addPost = ({addPostTitle, addPostBody}: AddPostProps) => {
     createPost(addPostTitle, addPostBody)
@@ -53,5 +54,5 @@ const mapStateToProps = (state: App): MapStateProps => ({
 
 export default connect<MapStateProps, MapDispatchProps, {}, App>(
   mapStateToProps,
-  {getPosts, toggleAddPostPopUp, createPost}
+  {getPosts, toggleAddPostPopUp, createPost, deletePost}
 )(PostsPageContainer);

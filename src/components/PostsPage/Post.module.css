@@ -6,10 +6,33 @@
 }
 
 .postTitle {
-  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
   font-size: 18px;
   font-weight: 500;
   color: #B84F4F;
+}
+
+.postTitle div {
+  width: 100%;
+}
+
+.postTitle img {
+  border-radius: 3px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.postTitle img:hover {
+  background-color: #FAE9CB;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.postTitle img:active {
+  background-color: #FF8587;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .postTitle a {
