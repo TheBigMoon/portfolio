@@ -15,7 +15,7 @@ const UpdatePostForm: React.FC<UpdatePostFormProps & InjectedFormProps<UpdatePos
     handleSubmit
   }
 ) => {
-  debugger
+
   return (
     <div className={s.background}>
       <form className={s.updatePostForm} onSubmit={handleSubmit}>
