@@ -8,19 +8,19 @@ import editPostBtn from '../../multimedia/editPostButton.png'
 
 type PostProps = {
   post: PostType | null,
-  deletePost?: (id: number) => void,
   showLink: boolean,
   showDeleteBtn: boolean,
-  toggleUpdatePostPopUp: (postId: number) => void
+  toggleDeletePostPopUp?: (postId: number | null) => void,
+  toggleUpdatePostPopUp: (postId: number | null) => void
 }
 
 const Post: React.FC<PostProps> = (
   {
     post,
     showLink,
-    deletePost,
     showDeleteBtn,
-    toggleUpdatePostPopUp
+    toggleUpdatePostPopUp,
+    toggleDeletePostPopUp
   }
   ) => {
   if (post === null) {
@@ -29,15 +29,10 @@ const Post: React.FC<PostProps> = (
   return (
     <div className={s.post}>
       <div className={s.postTitle}>
-        {showLink ?
-          <div>
-            <NavLink to={`post/${post.id}`}>
-              {post.title}
-            </NavLink>
-          </div>
-          : post.title}
+        {showLink ? <div><NavLink to={`post/${post.id}`}>{post.title}</NavLink></div>
+          : <div>{post.title}</div>}
         {showDeleteBtn ? <img
-          onClick={() => deletePost ? deletePost(post.id) : null}
+          onClick={() => toggleDeletePostPopUp && toggleDeletePostPopUp(post.id)}
           src={deleteBtn}
           alt="deleteBtn"/> : null}
         <img onClick={() => toggleUpdatePostPopUp(post.id)} src={editPostBtn} alt='editPostBtn'/>
