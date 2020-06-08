@@ -30,7 +30,8 @@ export type PopUpsType = {
 export type StateType = {
   posts: Array<PostType> | null,
   post: PostType | null,
-  popUps: PopUpsType
+  popUps: PopUpsType,
+  postIdToUpdate: number | null
 }
 export type ActionType = GetPostsType | SetPostsType | GetPostType
   | SetPostType | UpdatePostType | SetUpdatedPostType |
@@ -55,6 +56,6 @@ export type CreateCommentType = {type: typeof CREATE_COMMENT, postId: number, bo
 export type SetCreatedCommentType = {type: typeof SET_CREATED_COMMENT, postId: number, body: string}
 export type ToggleAddPostPopUp = {type: typeof TOGGLE_ADD_POST_POP_UP}
 export type ToggleAddCommentPopUp = {type: typeof TOGGLE_ADD_COMMENT_POP_UP}
-export type ToggleUpdatePostPopUp = {type: typeof TOGGLE_UPDATE_POST_POP_UP}
+export type ToggleUpdatePostPopUp = {type: typeof TOGGLE_UPDATE_POST_POP_UP, postId: number | null}
 
 
