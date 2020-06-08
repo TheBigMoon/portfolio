@@ -2,7 +2,7 @@ import {takeLatest, put, call} from 'redux-saga/effects'
 import {
   clearDeletedPost, CREATE_COMMENT, CREATE_POST, DELETE_POST,
   GET_POST, GET_POSTS, SET_UPDATED_POST, setPost, setPosts,
-  TOGGLE_ADD_POST_POP_UP, toggleUpdatePostPopUp, UPDATE_POST
+  TOGGLE_ADD_POST_POP_UP, toggleDeletePostPopUp, toggleUpdatePostPopUp, UPDATE_POST
 } from "../store/postReducer";
 import {API} from "../api/api";
 import {CreateCommentType, CreatePostType, DeletePostType, GetPostType, UpdatePostType} from "../types/types";
@@ -21,6 +21,7 @@ function* deletePostWorker(action: DeletePostType) {
   const postId = action.postId;
   yield call(API.deletePost, postId);
   yield put(clearDeletedPost(postId))
+  yield put(toggleDeletePostPopUp(null))
 }
 
 function* createPostWorker(action: CreatePostType) {
