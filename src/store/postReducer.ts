@@ -41,7 +41,8 @@ const initialState: StateType = {
     showAddPost: false,
     showAddComment: false,
     showUpdatePost: false
-  }
+  },
+  postIdToUpdate: null
 }
 
 export const postReducer = (state = initialState, action: ActionType): StateType => {
@@ -105,7 +106,8 @@ export const postReducer = (state = initialState, action: ActionType): StateType
         popUps: {
           ...state.popUps,
           showUpdatePost: !state.popUps.showUpdatePost
-        }
+        },
+        postIdToUpdate: action.postId
       }
     }
     default: {
@@ -133,4 +135,6 @@ export const createComment = (postId: number, body: string): CreateCommentType =
 // PopUp actions
 export const toggleAddPostPopUp = (): ToggleAddPostPopUp => ({type: TOGGLE_ADD_POST_POP_UP});
 export const toggleAddCommentPopUp = (): ToggleAddCommentPopUp => ({type: TOGGLE_ADD_COMMENT_POP_UP});
-export const toggleUpdatePostPopUp = (): ToggleUpdatePostPopUp => ({type: TOGGLE_UPDATE_POST_POP_UP});
+export const toggleUpdatePostPopUp = (postId: number | null): ToggleUpdatePostPopUp => ({
+  type: TOGGLE_UPDATE_POST_POP_UP, postId
+});
