@@ -6,7 +6,7 @@ import {
   createPost,
   deletePost,
   getPosts,
-  toggleAddPostPopUp,
+  toggleAddPostPopUp, toggleDeletePostPopUp,
   toggleUpdatePostPopUp,
   updatePost
 } from "../../store/postReducer";
@@ -14,19 +14,23 @@ import Post from "./Post";
 import AddPostButton from "../common/AddPostButton/AddPostButton";
 import AddPostForm from "../common/reduxForms/AddPostForm/AddPostForm";
 import UpdatePostForm from "../common/reduxForms/UpdatePostForm/UpdatePostForm";
+import DeletePostPopUp from "../common/DeletePostPopUp/DeletePostPopUp";
 
 type MapStateProps = {
   posts: Array<PostType> | null,
   showAddPost: boolean,
   showEditPost: boolean,
-  postIdToUpdate: number | null
+  showDeletePost: boolean,
+  postIdToUpdate: number | null,
+  postIdToDelete: number | null
 }
 type MapDispatchProps = {
   getPosts: () => void,
   toggleAddPostPopUp: () => void,
   toggleUpdatePostPopUp: (id: number | null) => void,
+  toggleDeletePostPopUp: (id: number | null) => void,
   createPost: (title: string, body: string) => void,
-  deletePost: (id: number) => void,
+  deletePost: (postId: number) => void,
   updatePost: (postId: number, title: string, body: string) => void
 }
 export type AddPostProps = {
@@ -43,14 +47,17 @@ const PostsPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
   {
     posts,
     getPosts,
-    toggleAddPostPopUp,
+    postIdToUpdate,
+    postIdToDelete,
     showAddPost,
     showEditPost,
+    showDeletePost,
     createPost,
     deletePost,
-    postIdToUpdate,
+    updatePost,
+    toggleAddPostPopUp,
     toggleUpdatePostPopUp,
-    updatePost
+    toggleDeletePostPopUp
   }
 ) => {
   useEffect(() => {
@@ -61,7 +68,7 @@ const PostsPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
     null : posts.map(post => <Post
       toggleUpdatePostPopUp={toggleUpdatePostPopUp}
       showDeleteBtn={true}
-      deletePost={deletePost}
+      toggleDeletePostPopUp={toggleDeletePostPopUp}
       showLink={true}
       post={post}/>
     ).reverse()
@@ -70,11 +77,11 @@ const PostsPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
     createPost(addPostTitle, addPostBody)
   }
 
-  const editPost = ({updatePostTitle, updatePostBody}: UpdatePostProps, ) => {
+  const editPost = ({updatePostTitle, updatePostBody}: UpdatePostProps,) => {
     let postId = postIdToUpdate === null ? 0 : postIdToUpdate
     updatePost(postId, updatePostTitle, updatePostBody)
   }
-  debugger
+
   return (
     <div>
       {allPosts}
@@ -87,7 +94,12 @@ const PostsPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
         />
         : null
       }
-
+      {showDeletePost ? <DeletePostPopUp
+        deletePost={deletePost}
+        postIdToDelete={postIdToDelete}
+        toggleDeletePostPopUp={toggleDeletePostPopUp}
+        />
+        : null}
       {!showAddPost ? <AddPostButton toggleAddPostPopUp={toggleAddPostPopUp}/> : null}
     </div>
   )
@@ -97,10 +109,19 @@ const mapStateToProps = (state: App): MapStateProps => ({
   posts: state.postPage.posts,
   showAddPost: state.postPage.popUps.showAddPost,
   showEditPost: state.postPage.popUps.showUpdatePost,
-  postIdToUpdate: state.postPage.postIdToUpdate
+  showDeletePost: state.postPage.popUps.showDeletePost,
+  postIdToUpdate: state.postPage.postIdToUpdate,
+  postIdToDelete: state.postPage.postIdToDelete
 });
 
 export default connect<MapStateProps, MapDispatchProps, {}, App>(
-  mapStateToProps,
-  {getPosts, toggleAddPostPopUp, createPost, deletePost, toggleUpdatePostPopUp, updatePost}
+  mapStateToProps, {
+    getPosts,
+    toggleAddPostPopUp,
+    createPost,
+    deletePost,
+    toggleUpdatePostPopUp,
+    updatePost,
+    toggleDeletePostPopUp
+  }
 )(PostsPageContainer);
