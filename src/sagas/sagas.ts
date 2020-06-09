@@ -1,7 +1,7 @@
 import {takeLatest, put, call} from 'redux-saga/effects'
 import {
   clearDeletedPost, CREATE_COMMENT, CREATE_POST, DELETE_POST,
-  GET_POST, GET_POSTS, SET_UPDATED_POST, setPost, setPosts,
+  GET_POST, GET_POSTS, setPost, setPosts, setUpdatedPost,
   TOGGLE_ADD_POST_POP_UP, toggleDeletePostPopUp, toggleUpdatePostPopUp, UPDATE_POST
 } from "../store/postReducer";
 import {API} from "../api/api";
@@ -34,7 +34,7 @@ function* createPostWorker(action: CreatePostType) {
 function* updatePostWorker(action: UpdatePostType) {
   const {postId, title, body} = action;
   yield call(API.updatePost, postId, title, body);
-  yield put({type: SET_UPDATED_POST, postId, title, body})
+  yield put(setUpdatedPost(postId, title, body))
   yield put(toggleUpdatePostPopUp(null))
 }
 
