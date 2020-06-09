@@ -2,24 +2,33 @@ import React, {useEffect} from "react";
 import {PostType} from "../../types/types";
 import {connect} from "react-redux";
 import {App} from "../../store/store";
-import {getPost} from "../../store/postReducer";
+import {getPost, sendComment, toggleAddCommentPopUp} from "../../store/postReducer";
 import Post from "./Post";
 import {useParams} from "react-router-dom";
+import CommentPostForm from "../common/reduxForms/CommentPostForm/CommentPostForm";
 
 type MapStateProps = {
   post: PostType | null,
-  postIdToUpdate: number | null,
-  showUpdatePost: boolean
+  postIdToComment: number | null,
+  showAddComment: boolean
 }
 type MapDispatchProps = {
   getPost: (id: number) => void,
+  sendComment: (postId: number, body: string) => void,
+  toggleAddCommentPopUp: (posId: number | null) => void,
+}
+export type CommentPostProps = {
+  commentPostBody: string
 }
 
 const PostPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
   {
     post,
     getPost,
-    showUpdatePost
+    sendComment,
+    postIdToComment,
+    toggleAddCommentPopUp,
+    showAddComment
   }
 ) => {
   const {postId} = useParams()
@@ -28,25 +37,39 @@ const PostPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
     getPost(postId)
   }, [getPost, postId])
 
+  const addComment = ({commentPostBody}: CommentPostProps) => {
+    let postId = postIdToComment === null ? 0 : postIdToComment
+    sendComment(postId, commentPostBody);
+  }
+
   return (
     <div>
       <Post
+        toggleAddCommentPopUp={toggleAddCommentPopUp}
+        showCommentBtn={true}
         showUpdateBtn={false}
         showDeleteBtn={false}
         showLink={false}
         post={post}
       />
+      {showAddComment ? <CommentPostForm
+        onSubmit={addComment}
+        postIdToComment={postIdToComment}
+        toggleAddCommentPopUp={toggleAddCommentPopUp}
+      />
+      : null
+      }
     </div>
   )
 }
 
 const mapStateToProps = (state: App): MapStateProps => ({
   post: state.postPage.post,
-  postIdToUpdate: state.postPage.postIdToUpdate,
-  showUpdatePost: state.postPage.popUps.showUpdatePost
+  postIdToComment: state.postPage.postIdToComment,
+  showAddComment: state.postPage.popUps.showAddComment
 });
 
 export default connect<MapStateProps, MapDispatchProps, {}, App>(
   mapStateToProps,
-  {getPost,}
+  {getPost, toggleAddCommentPopUp, sendComment}
 )(PostPageContainer);

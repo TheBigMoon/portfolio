@@ -66,6 +66,7 @@ const PostsPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
 
   const allPosts = posts === null ?
     null : posts.map(post => <Post
+      showCommentBtn={false}
       showUpdateBtn={true}
       showDeleteBtn={true}
       showLink={true}
