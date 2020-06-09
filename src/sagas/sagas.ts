@@ -1,11 +1,11 @@
 import {takeLatest, put, call} from 'redux-saga/effects'
 import {
   clearDeletedPost, CREATE_COMMENT, CREATE_POST, DELETE_POST,
-  GET_POST, GET_POSTS, setPost, setPosts, setUpdatedPost,
-  TOGGLE_ADD_POST_POP_UP, toggleDeletePostPopUp, toggleUpdatePostPopUp, UPDATE_POST
+  GET_POST, GET_POSTS, getPost, setPost, setPosts, setUpdatedPost,
+  TOGGLE_ADD_POST_POP_UP, toggleAddCommentPopUp, toggleDeletePostPopUp, toggleUpdatePostPopUp, UPDATE_POST
 } from "../store/postReducer";
 import {API} from "../api/api";
-import {CreateCommentType, CreatePostType, DeletePostType, GetPostType, UpdatePostType} from "../types/types";
+import {SendCommentType, CreatePostType, DeletePostType, GetPostType, UpdatePostType} from "../types/types";
 
 function* getPostsWorker() {
   const posts = yield call(API.getPosts);
@@ -39,9 +39,11 @@ function* updatePostWorker(action: UpdatePostType) {
 }
 
 // Доделать логику вставки коммента или закрытия всплывашки с обновлением поста и комментов
-function* createCommentWorker(action: CreateCommentType) {
+function* createCommentWorker(action: SendCommentType) {
   const {postId, body} = action;
   yield call(API.createComment, postId, body);
+  yield put(toggleAddCommentPopUp(null));
+  yield put(getPost(postId))
 }
 
 export function* sagaWatcher() {
