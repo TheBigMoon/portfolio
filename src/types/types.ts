@@ -40,12 +40,13 @@ export type StateType = {
   post: PostType | null,
   popUps: PopUpsType,
   postIdToUpdate: number | null,
-  postIdToDelete: number | null
+  postIdToDelete: number | null,
+  postIdToComment: number | null
 }
 export type ActionType = GetPostsType | SetPostsType | GetPostType
   | SetPostType | UpdatePostType | SetUpdatedPostType |
   DeletePostType | ClearDeletedPostType | CreatePostType |
-  SetCreatedPostType | CreateCommentType | SetCreatedCommentType |
+  SetCreatedPostType | SendCommentType | SetCreatedCommentType |
   ToggleAddPostPopUp | ToggleAddCommentPopUp | ToggleUpdatePostPopUp |
   ToggleDeletePostPopUp
 
@@ -61,13 +62,13 @@ export type ClearDeletedPostType = { type: typeof CLEAR_DELETED_POST, postId: nu
 export type CreatePostType = { type: typeof CREATE_POST, title: string, body: string }
 // Под вопросом: надо ли SetCreatedPostType вообще? Или можно просто сделать запрос на обновление постов
 export type SetCreatedPostType = { type: typeof SET_CREATED_POST, title: string, body: string }
-export type CreateCommentType = { type: typeof CREATE_COMMENT, postId: number, body: string }
+export type SendCommentType = { type: typeof CREATE_COMMENT, postId: number, body: string }
 // Под вопросом: надо ли SetCreatedCommentType вообще? Или можно просто сделать запрос на обновление комментов
 export type SetCreatedCommentType = { type: typeof SET_CREATED_COMMENT, postId: number, body: string }
 
 export type ToggleAddPostPopUp = { type: typeof TOGGLE_ADD_POST_POP_UP }
 export type ToggleDeletePostPopUp = { type: typeof TOGGLE_DELETE_POST_POP_UP, postId: number | null}
-export type ToggleAddCommentPopUp = { type: typeof TOGGLE_ADD_COMMENT_POP_UP }
+export type ToggleAddCommentPopUp = { type: typeof TOGGLE_ADD_COMMENT_POP_UP, postId: number | null}
 export type ToggleUpdatePostPopUp = { type: typeof TOGGLE_UPDATE_POST_POP_UP, postId: number | null }
 
 
