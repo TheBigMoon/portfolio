@@ -1,10 +1,11 @@
 import React from "react";
-import {CommentType} from "../../../types/types";
+import {CommentType} from "../../../../types/types";
+import s from './Comment.module.css'
 
 const Comment: React.FC<CommentType> = ({postId, id, body}) => {
   return (
-    <div>
-      {body}
+    <div className={s.comment}>
+      — {body}
     </div>
   )
 }

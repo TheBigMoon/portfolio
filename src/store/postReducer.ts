@@ -9,12 +9,11 @@ import {
   UpdatePostType,
   DeletePostType,
   CreatePostType,
-  CreateCommentType,
   SetUpdatedPostType,
   ClearDeletedPostType,
   ToggleAddPostPopUp,
   ToggleAddCommentPopUp,
-  ToggleUpdatePostPopUp
+  ToggleUpdatePostPopUp, ToggleDeletePostPopUp, SendCommentType
 } from "../types/types";
 
 export const GET_POSTS = 'GET_POSTS';
@@ -30,6 +29,7 @@ export const SET_CREATED_POST = 'SET_CREATED_POST';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const SET_CREATED_COMMENT = 'SET_CREATED_COMMENT';
 export const TOGGLE_ADD_POST_POP_UP = 'TOGGLE_ADD_POST_POP_UP';
+export const TOGGLE_DELETE_POST_POP_UP = 'TOGGLE_DELETE_POST_POP_UP';
 export const TOGGLE_ADD_COMMENT_POP_UP = 'TOGGLE_ADD_COMMENT_POP_UP';
 export const TOGGLE_UPDATE_POST_POP_UP = 'TOGGLE_UPDATE_POST_POP_UP';
 
@@ -40,8 +40,12 @@ const initialState: StateType = {
   popUps: {
     showAddPost: false,
     showAddComment: false,
-    showUpdatePost: false
-  }
+    showUpdatePost: false,
+    showDeletePost: false
+  },
+  postIdToUpdate: null,
+  postIdToDelete: null,
+  postIdToComment: null
 }
 
 export const postReducer = (state = initialState, action: ActionType): StateType => {
@@ -90,13 +94,24 @@ export const postReducer = (state = initialState, action: ActionType): StateType
         }
       }
     }
+    case TOGGLE_DELETE_POST_POP_UP: {
+      return {
+        ...state,
+        popUps: {
+          ...state.popUps,
+          showDeletePost: !state.popUps.showDeletePost
+        },
+        postIdToDelete: action.postId
+      }
+    }
     case TOGGLE_ADD_COMMENT_POP_UP: {
       return {
         ...state,
         popUps: {
           ...state.popUps,
           showAddComment: !state.popUps.showAddComment
-        }
+        },
+        postIdToComment: action.postId
       }
     }
     case TOGGLE_UPDATE_POST_POP_UP: {
@@ -105,7 +120,8 @@ export const postReducer = (state = initialState, action: ActionType): StateType
         popUps: {
           ...state.popUps,
           showUpdatePost: !state.popUps.showUpdatePost
-        }
+        },
+        postIdToUpdate: action.postId
       }
     }
     default: {
@@ -119,7 +135,7 @@ export const setPosts = (posts: Array<PostType>): SetPostsType => ({type: SET_PO
 export const getPost = (id: number): GetPostType => ({type: GET_POST, id})
 export const setPost = (post: PostType): SetPostType => ({type: SET_POST, post})
 export const deletePost = (postId: number): DeletePostType => ({type: DELETE_POST, postId})
-export const clearDeletedPost = (postId: number): ClearDeletedPostType => ({type: CLEAR_DELETED_POST, postId})
+export const clearDeletedPost = (postId: number ): ClearDeletedPostType => ({type: CLEAR_DELETED_POST, postId})
 export const createPost = (title: string, body: string): CreatePostType => ({type: CREATE_POST, title, body})
 export const updatePost = (postId: number, title: string, body: string): UpdatePostType => ({
   type: UPDATE_POST, postId, title, body
@@ -127,10 +143,17 @@ export const updatePost = (postId: number, title: string, body: string): UpdateP
 export const setUpdatedPost = (postId: number, title: string, body: string): SetUpdatedPostType => ({
   type: SET_UPDATED_POST, postId, title, body
 })
-export const createComment = (postId: number, body: string): CreateCommentType => ({
+export const sendComment = (postId: number, body: string): SendCommentType => ({
   type: CREATE_COMMENT, postId, body
 })
 // PopUp actions
 export const toggleAddPostPopUp = (): ToggleAddPostPopUp => ({type: TOGGLE_ADD_POST_POP_UP});
-export const toggleAddCommentPopUp = (): ToggleAddCommentPopUp => ({type: TOGGLE_ADD_COMMENT_POP_UP});
-export const toggleUpdatePostPopUp = (): ToggleUpdatePostPopUp => ({type: TOGGLE_UPDATE_POST_POP_UP});
+export const toggleDeletePostPopUp = (postId: number | null): ToggleDeletePostPopUp => ({
+  type: TOGGLE_DELETE_POST_POP_UP, postId
+});
+export const toggleAddCommentPopUp = (postId: number | null): ToggleAddCommentPopUp => ({
+  type: TOGGLE_ADD_COMMENT_POP_UP, postId
+});
+export const toggleUpdatePostPopUp = (postId: number | null): ToggleUpdatePostPopUp => ({
+  type: TOGGLE_UPDATE_POST_POP_UP, postId
+});
