@@ -66,10 +66,11 @@ const PostsPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
 
   const allPosts = posts === null ?
     null : posts.map(post => <Post
-      toggleUpdatePostPopUp={toggleUpdatePostPopUp}
+      showUpdateBtn={true}
       showDeleteBtn={true}
-      toggleDeletePostPopUp={toggleDeletePostPopUp}
       showLink={true}
+      toggleUpdatePostPopUp={toggleUpdatePostPopUp}
+      toggleDeletePostPopUp={toggleDeletePostPopUp}
       post={post}/>
     ).reverse()
 

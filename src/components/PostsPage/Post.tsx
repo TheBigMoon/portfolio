@@ -10,8 +10,9 @@ type PostProps = {
   post: PostType | null,
   showLink: boolean,
   showDeleteBtn: boolean,
+  showUpdateBtn: boolean,
   toggleDeletePostPopUp?: (postId: number | null) => void,
-  toggleUpdatePostPopUp: (postId: number | null) => void
+  toggleUpdatePostPopUp?: (postId: number | null) => void
 }
 
 const Post: React.FC<PostProps> = (
@@ -19,10 +20,11 @@ const Post: React.FC<PostProps> = (
     post,
     showLink,
     showDeleteBtn,
+    showUpdateBtn,
     toggleUpdatePostPopUp,
     toggleDeletePostPopUp
   }
-  ) => {
+) => {
   if (post === null) {
     return null
   }
@@ -30,12 +32,19 @@ const Post: React.FC<PostProps> = (
     <div className={s.post}>
       <div className={s.postTitle}>
         {showLink ? <div><NavLink to={`post/${post.id}`}>{post.title}</NavLink></div>
-          : <div>{post.title}</div>}
+          : <div>{post.title}</div>
+        }
         {showDeleteBtn ? <img
           onClick={() => toggleDeletePostPopUp && toggleDeletePostPopUp(post.id)}
           src={deleteBtn}
-          alt="deleteBtn"/> : null}
-        <img onClick={() => toggleUpdatePostPopUp(post.id)} src={editPostBtn} alt='editPostBtn'/>
+          alt="deleteBtn"/> : null
+        }
+        {showUpdateBtn ? <img
+          onClick={() => toggleUpdatePostPopUp && toggleUpdatePostPopUp(post.id)}
+          src={editPostBtn}
+          alt='editPostBtn'
+        /> : null
+        }
       </div>
       <div className={s.postBody}>
         {post.body}
