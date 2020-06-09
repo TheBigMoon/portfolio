@@ -5,7 +5,7 @@ import s from './Header.module.css'
 const Header = () => {
   return (
     <div className={s.header}>
-      <NavLink activeClassName={s.activeLink} to={'/main'}>
+      <NavLink activeClassName={s.activeLink} to={'/'}>
         Main
       </NavLink>
       <NavLink activeClassName={s.activeLink} to={'/posts'}>
