@@ -36,7 +36,7 @@ const Post: React.FC<PostProps> = (
   return (
     <div className={s.post}>
       <div className={s.postTitle}>
-        {showLink ? <div><NavLink to={`post/${post.id}`}>{post.title}</NavLink></div>
+        {showLink ? <div><NavLink to={`posts/${post.id}`}>{post.title}</NavLink></div>
           : <div>{post.title}</div>
         }
         {showDeleteBtn ? <img

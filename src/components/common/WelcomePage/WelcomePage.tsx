@@ -1,5 +1,6 @@
 import React from "react";
 import s from './WelcomePage.module.css';
+import {NavLink} from "react-router-dom";
 
 const WelcomePage = () => {
   return (
@@ -21,9 +22,9 @@ const WelcomePage = () => {
           Welcome!
         </p>
         <p>This is my simple web application.</p>
-        <button>
-          Enter
-        </button>
+        <NavLink className={s.enter} to={'/posts'}>
+          <p>ENTER</p>
+        </NavLink>
       </div>
     </div>
   )
