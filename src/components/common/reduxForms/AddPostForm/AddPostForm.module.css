@@ -78,8 +78,13 @@
 .addPostForm button:hover {
   cursor: pointer;
   background-color: #FF8587;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
+
+.addPostForm button:active {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
 .addPostForm button:nth-child(2):hover {
   background-color: #727a7c;
 }
