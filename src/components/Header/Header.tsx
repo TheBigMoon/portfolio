@@ -8,7 +8,7 @@ const Header = () => {
       <NavLink activeClassName={s.activeLink} to={'/main'}>
         Main
       </NavLink>
-      <NavLink activeClassName={s.activeLink} to={'/posts'}>
+      <NavLink activeClassName={s.activeLink} exact to={'/posts'}>
         Posts
       </NavLink>
     </div>
