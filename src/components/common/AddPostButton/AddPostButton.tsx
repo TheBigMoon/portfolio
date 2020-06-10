@@ -9,7 +9,9 @@ type AddPostBtnProps = {
 const AddPostButton: React.FC<AddPostBtnProps> = ({toggleAddPostPopUp}) => {
   return (
     <div onClick={toggleAddPostPopUp} className={s.addPost}>
-      <img src={addPostBtn} alt=""/>
+      <div className={s.btn}>
+        <img src={addPostBtn} alt=""/>
+      </div>
     </div>
   )
 }
