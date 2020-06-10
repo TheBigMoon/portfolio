@@ -39,11 +39,6 @@ const Post: React.FC<PostProps> = (
         {showLink ? <div><NavLink to={`posts/${post.id}`}>{post.title}</NavLink></div>
           : <div>{post.title}</div>
         }
-        {showDeleteBtn ? <img
-          onClick={() => toggleDeletePostPopUp && toggleDeletePostPopUp(post.id)}
-          src={deleteBtn}
-          alt="deleteBtn"/> : null
-        }
         {showUpdateBtn ? <img
           onClick={() => toggleUpdatePostPopUp && toggleUpdatePostPopUp(post.id)}
           src={editPostBtn}
@@ -55,6 +50,11 @@ const Post: React.FC<PostProps> = (
           src={commentPostBtn}
           alt="commentPostBtn"
         /> : null
+        }
+        {showDeleteBtn ? <img
+          onClick={() => toggleDeletePostPopUp && toggleDeletePostPopUp(post.id)}
+          src={deleteBtn}
+          alt="deleteBtn"/> : null
         }
       </div>
       <div className={s.postBody}>
