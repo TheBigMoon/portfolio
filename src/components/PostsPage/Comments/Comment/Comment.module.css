@@ -1,3 +1,33 @@
 .comment {
-  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: box-shadow 0.2s;
+}
+
+.comment:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.user {
+  margin-right: 5px;
+}
+
+.user img {
+  width: 50px;
+  height: 50px;
+
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.body p {
+  color: #B84F4F;
+  font-weight: 600;
 }
