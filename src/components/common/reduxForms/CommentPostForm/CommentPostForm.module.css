@@ -9,6 +9,7 @@
   height: 100vh;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  animation: showDiv 0.15s;
 }
 
 .commentPostForm {
@@ -88,4 +89,13 @@
 
 .commentPostForm button:nth-child(2):hover {
   background-color: #727a7c;
+}
+
+@keyframes showDiv {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
