@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import {CommentType} from "../../../types/types";
 import Comment from "./Comment/Comment";
 import s from './Comments.module.css';
 
 type CommentsProps = {
-  comments: Array<CommentType> | null
+  comments: Array<CommentType> | null,
+  showComments: boolean
 }
 
-const Comments: React.FC<CommentsProps> = ({comments}) => {
-  const [showComments, toggleCommentsMode] = useState(false)
+const Comments: React.FC<CommentsProps> = ({comments, showComments}) => {
 
   const allComments = comments === null ? [] :
     comments.map(comment => <Comment
@@ -18,19 +18,8 @@ const Comments: React.FC<CommentsProps> = ({comments}) => {
       body={comment.body}
     />)
 
-  const showCommentTitle = allComments.length > 0;
-
   return (
     <div className={s.comments}>
-      {showCommentTitle && showComments ? <span onClick={() => toggleCommentsMode(false)}
-          className={s.commentsTitle}>
-          Hide Comments
-        </span>
-        : showCommentTitle && <span onClick={() => toggleCommentsMode(true)}
-          className={s.commentsTitle}>
-          Show Comments
-        </span>
-      }
       {showComments ? allComments : null}
     </div>
   )
