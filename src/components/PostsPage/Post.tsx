@@ -1,10 +1,17 @@
 import React, {useState} from "react";
 import {PostType} from "../../types/types";
 import Comments from "./Comments/Comments";
-import s from './Post.module.css';
-import {NavLink} from "react-router-dom";
 import deleteBtn from '../../multimedia/deletePostButton.png';
 import editPostBtn from '../../multimedia/editPostButton.png'
+import {
+  IconButton,
+  PostBody, PostButton,
+  PostLink,
+  StyledPost,
+  Title,
+  TitleBlock,
+  CommentBtn
+} from "../../styledComponents/PostsPage/StyledPost";
 
 type PostProps = {
   post: PostType | null,
@@ -34,44 +41,47 @@ const Post: React.FC<PostProps> = (
   if (post === null) {
     return null
   } else return (
-    <div className={s.post}>
-      <div className={s.postTitle}>
-        {showLink ? <div><NavLink to={`posts/${post.id}`}>{post.title}</NavLink></div>
-          : <div>{post.title}</div>
+    <StyledPost>
+      <TitleBlock>
+        {showLink ?
+          <Title>
+            <PostLink to={`posts/${post.id}`}>
+              {post.title}
+            </PostLink>
+          </Title>
+          : <Title>{post.title}</Title>
         }
-        {showUpdateBtn ? <img
+        {showUpdateBtn ? <IconButton
           onClick={() => toggleUpdatePostPopUp && toggleUpdatePostPopUp(post.id)}
           src={editPostBtn}
           alt='editPostBtn'
         /> : null
         }
-        {showDeleteBtn ? <img
+        {showDeleteBtn ? <IconButton
           onClick={() => toggleDeletePostPopUp && toggleDeletePostPopUp(post.id)}
           src={deleteBtn}
           alt="deleteBtn"/> : null
         }
-      </div>
-      <div className={s.postBody}>
+      </TitleBlock>
+      <PostBody>
         {post.body}
-      </div>
+      </PostBody>
       {showCommentBtn ?
-        <button onClick={() => toggleAddCommentPopUp && toggleAddCommentPopUp(post.id)}>
+        <PostButton onClick={() => toggleAddCommentPopUp && toggleAddCommentPopUp(post.id)}>
           Add Comment
-        </button>
+        </PostButton>
         : null
       }
       {showCommentBtn && showComments ?
-        <span onClick={() => toggleCommentsMode(false)}
-              className={s.commentsTitle}>
+        <CommentBtn onClick={() => toggleCommentsMode(false)}>
           Hide Comments
-        </span>
-        : showCommentBtn && <span onClick={() => toggleCommentsMode(true)}
-                className={s.commentsTitle}>
+        </CommentBtn>
+        : showCommentBtn && <CommentBtn onClick={() => toggleCommentsMode(true)}>
           Show Comments
-        </span>
+        </CommentBtn>
       }
       {post.comments ? <Comments showComments={showComments} comments={post.comments}/> : null}
-    </div>
+    </StyledPost>
   )
 }
 

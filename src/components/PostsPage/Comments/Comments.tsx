@@ -1,7 +1,7 @@
 import React from "react";
 import {CommentType} from "../../../types/types";
 import Comment from "./Comment/Comment";
-import s from './Comments.module.css';
+import {StyledComments} from "../../../styledComponents/PostsPage/Comments/StyledComments";
 
 type CommentsProps = {
   comments: Array<CommentType> | null,
@@ -19,9 +19,9 @@ const Comments: React.FC<CommentsProps> = ({comments, showComments}) => {
     />)
 
   return (
-    <div className={s.comments}>
+    <StyledComments>
       {showComments ? allComments : null}
-    </div>
+    </StyledComments>
   )
 }
 

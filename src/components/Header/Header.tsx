@@ -1,17 +1,13 @@
 import React from "react";
-import {NavLink} from 'react-router-dom';
-import s from './Header.module.css'
+import {NavItem, StyledHeader} from "../../styledComponents/StyledHeader";
 
 const Header = () => {
   return (
-    <div className={s.header}>
-      <NavLink activeClassName={s.activeLink} to={'/main'}>
-        Main
-      </NavLink>
-      <NavLink activeClassName={s.activeLink} exact to={'/posts'}>
+    <StyledHeader>
+      <NavItem exact to={'/posts'}>
         Posts
-      </NavLink>
-    </div>
+      </NavItem>
+    </StyledHeader>
   )
 }
 

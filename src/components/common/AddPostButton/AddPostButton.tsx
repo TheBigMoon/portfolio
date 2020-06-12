@@ -1,6 +1,6 @@
 import React from "react";
 import addPostBtn from '../../../multimedia/addPostButton.png';
-import s from './AddPostButton.module.css';
+import {AddPostBtn, AddPostDiv} from "../../../styledComponents/common/buttons/AddPostBtn/AddPostBtn";
 
 type AddPostBtnProps = {
   toggleAddPostPopUp: () => void
@@ -8,11 +8,11 @@ type AddPostBtnProps = {
 
 const AddPostButton: React.FC<AddPostBtnProps> = ({toggleAddPostPopUp}) => {
   return (
-    <div onClick={toggleAddPostPopUp} className={s.addPost}>
-      <div className={s.btn}>
-        <img src={addPostBtn} alt=""/>
-      </div>
-    </div>
+    <AddPostDiv onClick={toggleAddPostPopUp}>
+      <AddPostBtn>
+        <img src={addPostBtn} alt="Add Post Button"/>
+      </AddPostBtn>
+    </AddPostDiv>
   )
 }
 
