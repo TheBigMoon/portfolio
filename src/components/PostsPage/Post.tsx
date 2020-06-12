@@ -1,11 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import {PostType} from "../../types/types";
 import Comments from "./Comments/Comments";
 import s from './Post.module.css';
 import {NavLink} from "react-router-dom";
 import deleteBtn from '../../multimedia/deletePostButton.png';
 import editPostBtn from '../../multimedia/editPostButton.png'
-import commentPostBtn from '../../multimedia/commentPostButton.png';
 
 type PostProps = {
   post: PostType | null,
@@ -30,10 +29,11 @@ const Post: React.FC<PostProps> = (
     toggleAddCommentPopUp
   }
 ) => {
+  let [showComments, toggleCommentsMode] = useState(false)
+
   if (post === null) {
     return null
-  }
-  return (
+  } else return (
     <div className={s.post}>
       <div className={s.postTitle}>
         {showLink ? <div><NavLink to={`posts/${post.id}`}>{post.title}</NavLink></div>
@@ -45,12 +45,6 @@ const Post: React.FC<PostProps> = (
           alt='editPostBtn'
         /> : null
         }
-        {showCommentBtn ? <img
-          onClick={()=> toggleAddCommentPopUp && toggleAddCommentPopUp(post.id)}
-          src={commentPostBtn}
-          alt="commentPostBtn"
-        /> : null
-        }
         {showDeleteBtn ? <img
           onClick={() => toggleDeletePostPopUp && toggleDeletePostPopUp(post.id)}
           src={deleteBtn}
@@ -60,7 +54,23 @@ const Post: React.FC<PostProps> = (
       <div className={s.postBody}>
         {post.body}
       </div>
-      {post.comments ? <Comments comments={post.comments}/> : null}
+      {showCommentBtn ?
+        <button onClick={() => toggleAddCommentPopUp && toggleAddCommentPopUp(post.id)}>
+          Add Comment
+        </button>
+        : null
+      }
+      {showCommentBtn && showComments ?
+        <span onClick={() => toggleCommentsMode(false)}
+              className={s.commentsTitle}>
+          Hide Comments
+        </span>
+        : showCommentBtn && <span onClick={() => toggleCommentsMode(true)}
+                className={s.commentsTitle}>
+          Show Comments
+        </span>
+      }
+      {post.comments ? <Comments showComments={showComments} comments={post.comments}/> : null}
     </div>
   )
 }
