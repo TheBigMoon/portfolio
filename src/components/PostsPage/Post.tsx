@@ -5,13 +5,14 @@ import deleteBtn from '../../multimedia/deletePostButton.png';
 import editPostBtn from '../../multimedia/editPostButton.png'
 import {
   IconButton,
-  PostBody, PostButton,
+  PostBody,
   PostLink,
   StyledPost,
   Title,
   TitleBlock,
   CommentBtn
 } from "../../styledComponents/PostsPage/StyledPost";
+import {Button} from "../../styledComponents/common/buttons/Button";
 
 type PostProps = {
   post: PostType | null,
@@ -67,9 +68,9 @@ const Post: React.FC<PostProps> = (
         {post.body}
       </PostBody>
       {showCommentBtn ?
-        <PostButton onClick={() => toggleAddCommentPopUp && toggleAddCommentPopUp(post.id)}>
+        <Button primary small onClick={() => toggleAddCommentPopUp && toggleAddCommentPopUp(post.id)}>
           Add Comment
-        </PostButton>
+        </Button>
         : null
       }
       {showCommentBtn && showComments ?

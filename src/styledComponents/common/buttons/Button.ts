@@ -1,17 +1,17 @@
 import styled from "styled-components";
 
 type ButtonProps = {
+  small?: boolean,
   primary?: boolean
 }
 
 export const Button = styled.button`
-  padding: 10px 20px;
-  margin-right: ${(props: ButtonProps) => props.primary ? '25px' : '0'};
+  padding: ${props => props.small ? '5px 10px' : '10px 20px'};
+  margin-right: ${props => props.primary ? '25px' : '0'};
   border: none;
   border-radius: 5px;
   outline: none;
-  text-transform: uppercase;
-  font-size: 16px;
+  font-size: ${props => props.small ? '14px' : '16px'};
   font-weight: 600;
   color: #FAE9CB;
   background-color: ${(props: ButtonProps) => props.primary ? '#B84F4F' : '#444B4D'};

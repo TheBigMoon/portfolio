@@ -53,26 +53,8 @@ export const PostLink = styled(NavLink).attrs({})`
   }
 `;
 
-export const PostBody = styled.div``;
-
-export const PostButton = styled.button`
-  padding: 5px 10px;
-  margin: 5px 15px 0 0 ;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  font-size: 14px;
-  font-weight: 600;
-  color: #FAE9CB;
-  background-color: #B84F4F;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: background-color 0.3s, box-shadow 0.3s;
-  
-  &:hover {
-    cursor: pointer;
-    background-color: #FF8587;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  }
+export const PostBody = styled.div`
+  margin-bottom: 5px;
 `;
 
 export const CommentBtn = styled.span`
