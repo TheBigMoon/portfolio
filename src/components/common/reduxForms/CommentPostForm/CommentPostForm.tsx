@@ -1,36 +1,37 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import s from './CommentPostForm.module.css';
 import {CommentPostProps} from "../../../PostsPage/PostPageContainer";
+import {PopUp} from "../../../../styledComponents/common/popUps/PopUp";
+import {Button} from "../../../../styledComponents/common/buttons/Button";
 
 type CommentPostFormProps = {
   toggleAddCommentPopUp: (postId: number | null) => void,
-  postIdToComment: number | null,
 }
 
 const CommentPostForm: React.FC<CommentPostFormProps & InjectedFormProps<CommentPostProps, CommentPostFormProps>> = (
   {
     toggleAddCommentPopUp,
-    postIdToComment,
     handleSubmit
   }
 ) => {
 
   return (
-    <div className={s.background}>
-      <form className={s.commentPostForm} onSubmit={handleSubmit}>
-        <p>LEAVE COMMENT</p>
+    <PopUp>
+      <form className={'popUpArea'} onSubmit={handleSubmit}>
+        <p>
+          LEAVE COMMENT
+        </p>
         <Field placeholder={'Comment'} name={'commentPostBody'} component={'textarea'}/>
-        <div>
-          <button type={'submit'}>
+        <div className={'buttonsArea'}>
+          <Button primary type={'submit'}>
             ADD COMMENT
-          </button>
-          <button onClick={() => toggleAddCommentPopUp(null)} type={'button'}>
+          </Button>
+          <Button onClick={() => toggleAddCommentPopUp(null)} type={'button'}>
             CANCEL
-          </button>
+          </Button>
         </div>
       </form>
-    </div>
+    </PopUp>
   )
 }
 

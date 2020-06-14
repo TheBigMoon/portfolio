@@ -1,7 +1,8 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import s from './UpdatePostForm.module.css';
 import {UpdatePostProps} from "../../../PostsPage/PostsPageContainer";
+import {PopUp} from "../../../../styledComponents/common/popUps/PopUp";
+import {Button} from "../../../../styledComponents/common/buttons/Button";
 
 type UpdatePostFormProps = {
   toggleUpdatePostPopUp: (id: number | null) => void,
@@ -17,17 +18,23 @@ const UpdatePostForm: React.FC<UpdatePostFormProps & InjectedFormProps<UpdatePos
 ) => {
 
   return (
-    <div className={s.background}>
-      <form className={s.updatePostForm} onSubmit={handleSubmit}>
-        <p>EDIT POST</p>
+    <PopUp>
+      <form className={'popUpArea'} onSubmit={handleSubmit}>
+        <p>
+          EDIT POST
+        </p>
         <Field placeholder={'Title'} name={'updatePostTitle'} component={'textarea'}/>
         <Field placeholder={'Body'} name={'updatePostBody'} component={'textarea'}/>
-        <div>
-          <button type={'submit'}>EDIT POST</button>
-          <button onClick={() => toggleUpdatePostPopUp(postIdToUpdate)} type={'button'}>CANCEL</button>
+        <div className={'buttonsArea'}>
+          <Button primary type={'submit'}>
+            EDIT POST
+          </Button>
+          <Button onClick={() => toggleUpdatePostPopUp(postIdToUpdate)} type={'button'}>
+            CANCEL
+          </Button>
         </div>
       </form>
-    </div>
+    </PopUp>
   )
 }
 

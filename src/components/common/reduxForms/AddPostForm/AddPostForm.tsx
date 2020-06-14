@@ -1,7 +1,8 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import s from './AddPostForm.module.css';
 import {AddPostProps} from "../../../PostsPage/PostsPageContainer";
+import {PopUp} from "../../../../styledComponents/common/popUps/PopUp";
+import {Button} from "../../../../styledComponents/common/buttons/Button";
 
 type AddPostFormProps = {
   toggleAddPostPopUp: () => void,
@@ -11,17 +12,23 @@ const AddPostForm: React.FC<
   AddPostFormProps & InjectedFormProps<AddPostProps, AddPostFormProps>
   > = ({toggleAddPostPopUp, handleSubmit}) => {
   return (
-    <div className={s.background}>
-      <form className={s.addPostForm} onSubmit={handleSubmit}>
-        <p>ADD POST</p>
+    <PopUp>
+      <form className={'popUpArea'} onSubmit={handleSubmit}>
+        <p>
+          ADD POST
+        </p>
         <Field placeholder={'Title'} name={'addPostTitle'} component={'textarea'}/>
         <Field placeholder={'Body'} name={'addPostBody'} component={'textarea'}/>
-        <div>
-          <button type={'submit'}>Add post</button>
-          <button onClick={toggleAddPostPopUp} type={'button'}>Cancel</button>
+        <div className={'buttons'}>
+          <Button primary type={'submit'}>
+            Add post
+          </Button>
+          <Button onClick={toggleAddPostPopUp} type={'button'}>
+            Cancel
+          </Button>
         </div>
       </form>
-    </div>
+    </PopUp>
   )
 }
 

@@ -38,6 +38,7 @@ const PostPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
   }, [getPost, postId])
 
   const addComment = ({commentPostBody}: CommentPostProps) => {
+    debugger
     let postId = postIdToComment === null ? 0 : postIdToComment
     sendComment(postId, commentPostBody);
   }
@@ -54,7 +55,6 @@ const PostPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
       />
       {showAddComment ? <CommentPostForm
         onSubmit={addComment}
-        postIdToComment={postIdToComment}
         toggleAddCommentPopUp={toggleAddCommentPopUp}
       />
       : null

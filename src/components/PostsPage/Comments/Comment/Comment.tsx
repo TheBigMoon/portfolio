@@ -1,19 +1,26 @@
 import React from "react";
 import {CommentType} from "../../../../types/types";
-import s from './Comment.module.css'
 import user from '../../../../multimedia/user.png';
+import {
+  CommentBody,
+  StyledComment,
+  User,
+  UserName
+} from "../../../../styledComponents/PostsPage/Comments/Comment/StyledComment";
 
 const Comment: React.FC<CommentType> = ({body}) => {
   return (
-    <div className={s.comment}>
-      <div className={s.user}>
+    <StyledComment>
+      <User>
         <img src={user} alt=""/>
-      </div>
-      <div className={s.body}>
-        <p>Name Surname</p>
+      </User>
+      <CommentBody>
+        <UserName>
+          Name Surname
+        </UserName>
         {body}
-      </div>
-    </div>
+      </CommentBody>
+    </StyledComment>
   )
 }
 
