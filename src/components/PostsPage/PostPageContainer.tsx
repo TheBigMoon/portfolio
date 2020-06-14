@@ -1,11 +1,11 @@
-import React, {useEffect} from "react";
-import {PostType} from "../../types/types";
-import {connect} from "react-redux";
-import {App} from "../../store/store";
-import {getPost, sendComment, toggleAddCommentPopUp} from "../../store/postReducer";
-import Post from "./Post";
-import {useParams} from "react-router-dom";
-import CommentPostForm from "../common/reduxForms/CommentPostForm/CommentPostForm";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { PostType } from '../../types/types';
+import { App } from '../../store/store';
+import { getPost, sendComment, toggleAddCommentPopUp } from '../../store/postReducer';
+import Post from './Post';
+import CommentPostForm from '../common/reduxForms/CommentPostForm/CommentPostForm';
 
 type MapStateProps = {
   post: PostType | null,
@@ -31,37 +31,37 @@ const PostPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
     showAddComment
   }
 ) => {
-  const {postId} = useParams()
+  const { postId } = useParams();
 
   useEffect(() => {
-    getPost(postId)
-  }, [getPost, postId])
+    getPost(postId);
+  }, [getPost, postId]);
 
-  const addComment = ({commentPostBody}: CommentPostProps) => {
-    debugger
-    let postId = postIdToComment === null ? 0 : postIdToComment
+  const addComment = ({ commentPostBody }: CommentPostProps) => {
+    const postId = postIdToComment === null ? 0 : postIdToComment;
     sendComment(postId, commentPostBody);
-  }
+  };
 
   return (
     <div>
       <Post
         toggleAddCommentPopUp={toggleAddCommentPopUp}
-        showCommentBtn={true}
+        showCommentBtn
         showUpdateBtn={false}
         showDeleteBtn={false}
         showLink={false}
         post={post}
       />
-      {showAddComment ? <CommentPostForm
-        onSubmit={addComment}
-        toggleAddCommentPopUp={toggleAddCommentPopUp}
-      />
-      : null
-      }
+      {showAddComment ? (
+        <CommentPostForm
+          onSubmit={addComment}
+          toggleAddCommentPopUp={toggleAddCommentPopUp}
+        />
+      )
+        : null}
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state: App): MapStateProps => ({
   post: state.postPage.post,
@@ -70,6 +70,9 @@ const mapStateToProps = (state: App): MapStateProps => ({
 });
 
 export default connect<MapStateProps, MapDispatchProps, {}, App>(
-  mapStateToProps,
-  {getPost, toggleAddCommentPopUp, sendComment}
+  mapStateToProps, {
+    getPost,
+    toggleAddCommentPopUp,
+    sendComment
+  }
 )(PostPageContainer);

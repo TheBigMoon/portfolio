@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import {NavLink} from "react-router-dom";
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const StyledHeader = styled.div`
   width: 100%;
@@ -14,7 +14,7 @@ export const StyledHeader = styled.div`
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 `;
 
-const activeClassName = 'item-active'
+const activeClassName = 'item-active';
 
 export const NavItem = styled(NavLink).attrs({
   activeClassName
@@ -34,4 +34,3 @@ export const NavItem = styled(NavLink).attrs({
    color: #B84F4F;
  }
 `;
-

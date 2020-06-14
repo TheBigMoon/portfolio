@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import {NavLink} from "react-router-dom";
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const StyledPost = styled.div`
   padding: 10px 20px 15px 20px;
