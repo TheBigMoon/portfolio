@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledFooter = styled.button`
+export const StyledFooter = styled.div`
   width: 100%;
   height: 60px;
   display: flex;
@@ -30,8 +30,5 @@ export const FooterLink = styled.a`
 `;
 
 export const FooterImg = styled.img`
-  width: 35px;
-  height: 35px;
   margin-right: 15px;
-  
 `;
