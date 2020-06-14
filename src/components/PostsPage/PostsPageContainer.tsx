@@ -1,7 +1,7 @@
-import React, {useEffect} from "react";
-import {PostType} from "../../types/types";
-import {connect} from "react-redux";
-import {App} from "../../store/store";
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { PostType } from '../../types/types';
+import { App } from '../../store/store';
 import {
   createPost,
   deletePost,
@@ -9,12 +9,12 @@ import {
   toggleAddPostPopUp, toggleDeletePostPopUp,
   toggleUpdatePostPopUp,
   updatePost
-} from "../../store/postReducer";
-import Post from "./Post";
-import AddPostButton from "../common/AddPostButton/AddPostButton";
-import AddPostForm from "../common/reduxForms/AddPostForm/AddPostForm";
-import UpdatePostForm from "../common/reduxForms/UpdatePostForm/UpdatePostForm";
-import DeletePostPopUp from "../common/DeletePostPopUp/DeletePostPopUp";
+} from '../../store/postReducer';
+import Post from './Post';
+import AddPostButton from '../common/AddPostButton/AddPostButton';
+import AddPostForm from '../common/reduxForms/AddPostForm/AddPostForm';
+import UpdatePostForm from '../common/reduxForms/UpdatePostForm/UpdatePostForm';
+import DeletePostPopUp from '../common/DeletePostPopUp/DeletePostPopUp';
 
 type MapStateProps = {
   posts: Array<PostType> | null,
@@ -61,51 +61,64 @@ const PostsPageContainer: React.FC<MapStateProps & MapDispatchProps> = (
   }
 ) => {
   useEffect(() => {
-    getPosts()
-  }, [getPosts])
+    getPosts();
+  }, [getPosts]);
 
-  const allPosts = posts === null ?
-    null : posts.map(post => <Post
-      showCommentBtn={false}
-      showUpdateBtn={true}
-      showDeleteBtn={true}
-      showLink={true}
-      toggleUpdatePostPopUp={toggleUpdatePostPopUp}
-      toggleDeletePostPopUp={toggleDeletePostPopUp}
-      post={post}/>
-    ).reverse()
+  const allPosts = posts === null
+    ? null : posts.map((post) => (
+      <Post
+        showCommentBtn={false}
+        showUpdateBtn
+        showDeleteBtn
+        showLink
+        toggleUpdatePostPopUp={toggleUpdatePostPopUp}
+        toggleDeletePostPopUp={toggleDeletePostPopUp}
+        post={post}
+      />
+    )).reverse();
 
-  const addPost = ({addPostTitle, addPostBody}: AddPostProps) => {
-    createPost(addPostTitle, addPostBody)
-  }
+  const addPost = ({ addPostTitle, addPostBody }: AddPostProps) => {
+    createPost(addPostTitle, addPostBody);
+  };
 
-  const editPost = ({updatePostTitle, updatePostBody}: UpdatePostProps,) => {
-    let postId = postIdToUpdate === null ? 0 : postIdToUpdate
-    updatePost(postId, updatePostTitle, updatePostBody)
-  }
+  const editPost = ({ updatePostTitle, updatePostBody }: UpdatePostProps) => {
+    const postId = postIdToUpdate === null ? 0 : postIdToUpdate;
+    updatePost(postId, updatePostTitle, updatePostBody);
+  };
 
   return (
     <div>
       {allPosts}
-      {showAddPost ? <AddPostForm onSubmit={addPost} toggleAddPostPopUp={toggleAddPostPopUp}/> : null}
-      {showEditPost ?
-        <UpdatePostForm
-          postIdToUpdate={postIdToUpdate}
-          toggleUpdatePostPopUp={toggleUpdatePostPopUp}
-          onSubmit={editPost}
-        />
-        : null
-      }
-      {showDeletePost ? <DeletePostPopUp
-        deletePost={deletePost}
-        postIdToDelete={postIdToDelete}
-        toggleDeletePostPopUp={toggleDeletePostPopUp}
-        />
+      {showAddPost
+        ? (
+          <AddPostForm
+            onSubmit={addPost}
+            toggleAddPostPopUp={toggleAddPostPopUp}
+          />
+        )
         : null}
-      {!showAddPost ? <AddPostButton toggleAddPostPopUp={toggleAddPostPopUp}/> : null}
+      {showEditPost
+        ? (
+          <UpdatePostForm
+            postIdToUpdate={postIdToUpdate}
+            toggleUpdatePostPopUp={toggleUpdatePostPopUp}
+            onSubmit={editPost}
+          />
+        )
+        : null}
+      {showDeletePost
+        ? (
+          <DeletePostPopUp
+            deletePost={deletePost}
+            postIdToDelete={postIdToDelete}
+            toggleDeletePostPopUp={toggleDeletePostPopUp}
+          />
+        )
+        : null}
+      {!showAddPost ? <AddPostButton toggleAddPostPopUp={toggleAddPostPopUp} /> : null}
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state: App): MapStateProps => ({
   posts: state.postPage.posts,

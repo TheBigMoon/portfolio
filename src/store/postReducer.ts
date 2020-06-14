@@ -14,7 +14,7 @@ import {
   ToggleAddPostPopUp,
   ToggleAddCommentPopUp,
   ToggleUpdatePostPopUp, ToggleDeletePostPopUp, SendCommentType
-} from "../types/types";
+} from '../types/types';
 
 export const GET_POSTS = 'GET_POSTS';
 export const SET_POSTS = 'SET_POSTS';
@@ -33,7 +33,6 @@ export const TOGGLE_DELETE_POST_POP_UP = 'TOGGLE_DELETE_POST_POP_UP';
 export const TOGGLE_ADD_COMMENT_POP_UP = 'TOGGLE_ADD_COMMENT_POP_UP';
 export const TOGGLE_UPDATE_POST_POP_UP = 'TOGGLE_UPDATE_POST_POP_UP';
 
-
 const initialState: StateType = {
   posts: null,
   post: null,
@@ -46,7 +45,7 @@ const initialState: StateType = {
   postIdToUpdate: null,
   postIdToDelete: null,
   postIdToComment: null
-}
+};
 
 export const postReducer = (state = initialState, action: ActionType): StateType => {
   switch (action.type) {
@@ -54,36 +53,34 @@ export const postReducer = (state = initialState, action: ActionType): StateType
       return {
         ...state,
         posts: action.posts
-      }
+      };
     }
     case SET_POST: {
       return {
         ...state,
         post: action.post
-      }
+      };
     }
     case CLEAR_DELETED_POST: {
       return {
         ...state,
-        posts: state.posts && state.posts.filter(post => post.id !== action.postId)
-      }
+        posts: state.posts && state.posts.filter((post) => post.id !== action.postId)
+      };
     }
     case SET_UPDATED_POST: {
       return {
         ...state,
-        posts: state.posts && state.posts.map(post => {
+        posts: state.posts && state.posts.map((post) => {
           if (post.id === action.postId) {
             return {
               ...post,
               comments: post.comments,
               title: action.title,
               body: action.body
-            }
-          } else {
-            return post;
-          }
+            };
+          } return post;
         })
-      }
+      };
     }
     case TOGGLE_ADD_POST_POP_UP: {
       return {
@@ -92,7 +89,7 @@ export const postReducer = (state = initialState, action: ActionType): StateType
           ...state.popUps,
           showAddPost: !state.popUps.showAddPost
         }
-      }
+      };
     }
     case TOGGLE_DELETE_POST_POP_UP: {
       return {
@@ -102,7 +99,7 @@ export const postReducer = (state = initialState, action: ActionType): StateType
           showDeletePost: !state.popUps.showDeletePost
         },
         postIdToDelete: action.postId
-      }
+      };
     }
     case TOGGLE_ADD_COMMENT_POP_UP: {
       return {
@@ -112,7 +109,7 @@ export const postReducer = (state = initialState, action: ActionType): StateType
           showAddComment: !state.popUps.showAddComment
         },
         postIdToComment: action.postId
-      }
+      };
     }
     case TOGGLE_UPDATE_POST_POP_UP: {
       return {
@@ -122,32 +119,46 @@ export const postReducer = (state = initialState, action: ActionType): StateType
           showUpdatePost: !state.popUps.showUpdatePost
         },
         postIdToUpdate: action.postId
-      }
+      };
     }
     default: {
       return state;
     }
   }
-}
+};
 
-export const getPosts = (): GetPostsType => ({type: GET_POSTS})
-export const setPosts = (posts: Array<PostType>): SetPostsType => ({type: SET_POSTS, posts})
-export const getPost = (id: number): GetPostType => ({type: GET_POST, id})
-export const setPost = (post: PostType): SetPostType => ({type: SET_POST, post})
-export const deletePost = (postId: number): DeletePostType => ({type: DELETE_POST, postId})
-export const clearDeletedPost = (postId: number ): ClearDeletedPostType => ({type: CLEAR_DELETED_POST, postId})
-export const createPost = (title: string, body: string): CreatePostType => ({type: CREATE_POST, title, body})
-export const updatePost = (postId: number, title: string, body: string): UpdatePostType => ({
-  type: UPDATE_POST, postId, title, body
-})
-export const setUpdatedPost = (postId: number, title: string, body: string): SetUpdatedPostType => ({
-  type: SET_UPDATED_POST, postId, title, body
-})
-export const sendComment = (postId: number, body: string): SendCommentType => ({
-  type: CREATE_COMMENT, postId, body
-})
+export const getPosts = (): GetPostsType => ({ type: GET_POSTS });
+export const setPosts = (posts: Array<PostType>): SetPostsType => ({ type: SET_POSTS, posts });
+export const getPost = (id: number): GetPostType => ({ type: GET_POST, id });
+export const setPost = (post: PostType): SetPostType => ({ type: SET_POST, post });
+export const deletePost = (postId: number): DeletePostType => ({ type: DELETE_POST, postId });
+export const clearDeletedPost = (postId: number): ClearDeletedPostType => (
+  {
+    type: CLEAR_DELETED_POST, postId
+  }
+);
+export const createPost = (title: string, body: string): CreatePostType => (
+  {
+    type: CREATE_POST, title, body
+  }
+);
+export const updatePost = (postId: number, title: string, body: string): UpdatePostType => (
+  {
+    type: UPDATE_POST, postId, title, body
+  }
+);
+export const setUpdatedPost = (postId: number, title: string, body: string): SetUpdatedPostType => (
+  {
+    type: SET_UPDATED_POST, postId, title, body
+  }
+);
+export const sendComment = (postId: number, body: string): SendCommentType => (
+  {
+    type: CREATE_COMMENT, postId, body
+  }
+);
 // PopUp actions
-export const toggleAddPostPopUp = (): ToggleAddPostPopUp => ({type: TOGGLE_ADD_POST_POP_UP});
+export const toggleAddPostPopUp = (): ToggleAddPostPopUp => ({ type: TOGGLE_ADD_POST_POP_UP });
 export const toggleDeletePostPopUp = (postId: number | null): ToggleDeletePostPopUp => ({
   type: TOGGLE_DELETE_POST_POP_UP, postId
 });

@@ -1,5 +1,5 @@
-import styled, {keyframes} from "styled-components";
-import {NavLink} from "react-router-dom";
+import styled, { keyframes } from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const animate = keyframes`
   0% {
@@ -45,11 +45,11 @@ export const Circle = styled.li<StyledLiProps>`
   bottom: -150px;
   border-radius: 50%;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  left: ${props => props.left}%;
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
-  animation-delay: ${props => props.aDelay}s;
-  animation-duration: ${props => props.aDuration}s;
+  left: ${(props) => props.left}%;
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
+  animation-delay: ${(props) => props.aDelay}s;
+  animation-duration: ${(props) => props.aDuration}s;
 `;
 
 export const WelcomeArea = styled.div`
