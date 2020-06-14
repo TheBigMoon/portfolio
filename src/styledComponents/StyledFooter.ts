@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const StyledFooter = styled.button`
-  
   width: 100%;
   height: 60px;
   display: flex;

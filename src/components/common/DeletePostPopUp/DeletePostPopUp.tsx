@@ -1,6 +1,6 @@
 import React from "react";
 import {Button} from "../../../styledComponents/common/buttons/Button";
-import {Background, ButtonsArea, PopUpArea, PopUpTitle} from "../../../styledComponents/common/popUps/DeletePopUp";
+import {PopUp} from "../../../styledComponents/common/popUps/PopUp";
 
 type DeletePostPopUpProps = {
   toggleDeletePostPopUp: (id: number | null) => void,
@@ -14,17 +14,17 @@ const DeletePostPopUp: React.FC<DeletePostPopUpProps> = (
   let postId = postIdToDelete ? postIdToDelete : 0
 
   return (
-    <Background>
-      <PopUpArea>
-        <PopUpTitle>
+    <PopUp>
+      <div className={'popUpArea'}>
+        <p>
           DELETE POST ?
-        </PopUpTitle>
-        <ButtonsArea>
+        </p>
+        <div className={'buttonsArea'}>
           <Button primary onClick={() => deletePost(postId)}>DELETE POST</Button>
           <Button onClick={() => toggleDeletePostPopUp(null)}>CANCEL</Button>
-        </ButtonsArea>
-      </PopUpArea>
-    </Background>
+        </div>
+      </div>
+    </PopUp>
   )
 }
 
